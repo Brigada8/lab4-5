@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag crispydanger/lab4-5:latest
+      run: docker-compose -f docker-compose.yml build --tag crispydanger/lab4-5:latest
       
     - name: Docker Push
       run: docker push crispydanger/lab4-5
