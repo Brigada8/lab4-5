@@ -1,10 +1,10 @@
-name: Build and Push Docker Image to Docker Hub
+name: Docker Image CI
 
 on:
   push:
-    branches: ["main" ]
+    branches: [ master ]
   pull_request:
-    branches: ["main" ]
+    branches: [ master ]
 
 jobs:
 
@@ -13,31 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker-compose build -f docker-compose.yml --no-cache --force-rm 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Test the Docker image
-        run: docker-compose up -f docker-compose.yml -d 
-  push_to_registry:
-    name: Push Docker image to Docker Hub
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        run: docker push ${{secrets.DOCKER_USERNAME}}/lab4-5
-        
+      run: docker build . --file Dockerfile --tag crispydanger/lab4-5:latest
+      
+    - name: Docker Push
+      run: docker push crispydanger/lab4-5
