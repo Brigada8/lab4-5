@@ -47,3 +47,4 @@ jobs:
         with:
           context: "{{defaultContext}}"
           push: true
+          tags: ":latest"
