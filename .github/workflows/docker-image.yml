@@ -44,8 +44,4 @@ jobs:
         context: "{{defaultContext}}"
         push: true
         tags: ${{ steps.meta.outputs.tags }}
-<<<<<<< HEAD
         labels: ${{ steps.meta.outputs.labels }}
-=======
-        labels: ${{ steps.meta.outputs.labels }}
->>>>>>> df16694a6a59f73bff2c87484643d04cada71da8
