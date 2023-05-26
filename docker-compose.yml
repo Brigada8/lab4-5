@@ -2,9 +2,9 @@ services:
   html-server:
     image: html-server
     ports: 
-      - 80:80
+      - "80:80"
     expose: 
-      - 80:80
+      - "80"
 
   watchtower:
     image: containrrr/watchtower
