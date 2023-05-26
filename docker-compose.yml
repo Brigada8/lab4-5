@@ -1,0 +1,14 @@
+services:
+  html-server:
+    image: html-server
+    ports: 
+      - 80:80
+    expose: 
+      - 80:80
+
+  watchtower:
+    image: containrrr/watchtower
+    ports: 
+      - 84:85
+    expose:
+      - 84:84
