@@ -1,6 +1,6 @@
 services:
   html-server:
-    image: html-server
+    image: index.docker.io/crispydanger/lab4-5:main
     ports: 
       - "80:80"
     expose: 
